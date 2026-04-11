@@ -18,14 +18,20 @@ public:
     };
 
     bool setExpression(string input_expression);
-    string input() const;
+    int operation_count() const;
+    vector<char> variables_used() const;
+    vector<string>operators_used() const;
 
 private:
     string changeToUpperCase(string text) const;
     bool splitTokens();     // function to split the input expression into tokens and store them in a vector
     bool checkExpression();
     string originalExpression;
-    vector<string> tokenList;       // vector to store the tokens of the input expression
+    vector<string> tokenList;       // vector to store each element of the input expression
+
+    bool isVariable(string token) const;     // function to check if a token is a variable (A, B, C)
+    bool isAnyOperator(string token) const;  // function to check if a token is an operator (AND, OR, NOT, XOR, NAND, NOR)
+    void add_usedOperator(string operator_name, vector<string>& operator_list) const;   // function to add an operator to the list of used operators only if it is not already in the list
 };
 
 #endif
