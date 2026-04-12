@@ -28,3 +28,55 @@ string BooleanExpression::changeToUpperCase(string text) const {
 
     return text;
 }
+
+// implementing the function to return the count of the operations in the expression
+int BooleanExpression::operation_count() const {
+    int count = 0;
+
+    for (int i = 0; i < (int)tokenList.size(); i++) {
+        if (isAnyOperator(tokenList[i])) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+// implementing the function to return a vector of the variables used in the expression
+vector<char> BooleanExpression::variables_used() const {
+    vector<char> variables;
+    bool isA = false;
+    bool isB = false;
+    bool isC = false;
+
+    // iterating through the token list to check for the variables A, B, and C and adding them to the vector if they are used in the expression
+    for (int i = 0; i < (int)tokenList.size(); i++) {
+        if (tokenList[i] == "A" && !isA) {
+            variables.push_back('A');
+            isA = true;
+        } else if (tokenList[i] == "B" && !isB) {
+            variables.push_back('B');
+            isB = true;
+        } else if (tokenList[i] == "C" && !isC) {
+            variables.push_back('C');
+            isC = true;
+        }
+    }
+
+    return variables;
+}
+
+
+// implementing the function to return a vector of the operators used in the expression
+vector<string> BooleanExpression::operators_used() const {
+    vector<string> used_operators;
+
+    // iterating through the token list to check for the operators then adding them to the vector if they are used in the expression
+    for (int i = 0; i < (int)tokenList.size(); i++) {
+        if (isAnyOperator(tokenList[i])) {
+            add_usedOperator(tokenList[i], used_operators); // prevent duplicates when storing the operators in the vector
+        }
+    }
+
+    return used_operators;
+}
