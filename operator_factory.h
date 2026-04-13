@@ -2,11 +2,12 @@
 #ifndef OPERATOR_FACTORY_H
 #define OPERATOR_FACTORY_H
 
+#include "operator.h"   // including the operator header file to use the operator classes in this factory class
 #include <string>
 
 using namespace std;
 
-// creating a class to handle the logic gate operations and return the results based on the operator and inputs
+// creating a class to handle operator selection and application
 class OperatorFactory {
 public:
     string getOperatorDescription(string operatorName) const;   // function to get the description of the operator from the user input
