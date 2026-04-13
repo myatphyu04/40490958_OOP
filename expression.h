@@ -32,6 +32,9 @@ private:
     bool isVariable(string token) const;     // function to check if a token is a variable (A, B, C)
     bool isAnyOperator(string token) const;  // function to check if a token is an operator (AND, OR, NOT, XOR, NAND, NOR)
     void add_usedOperator(string operator_name, vector<string>& operator_list) const;   // function to add an operator to the list of used operators only if it is not already in the list
+
+    bool isLowOperator(string token) const;
+    bool isMiddleOperator(string token) const;
 };
 
 #endif
