@@ -98,3 +98,29 @@ bool BooleanExpression::isAnyOperator(string token) const {
     return token == "AND" || token == "OR" || token == "NOT" ||
            token == "XOR" || token == "NAND" || token == "NOR";
 }
+
+// implementing the function to return the current value of a variable based on its name 
+bool BooleanExpression::variable_value(string variableName) const {
+    if (variableName == "A") {
+        return currentA;
+    }
+    if (variableName == "B") {
+        return currentB;
+    }
+    return currentC;
+}
+
+// implementing the function to add an operator to the list of used operators if it is not already in the list
+void BooleanExpression::add_usedOperator(string operatorName, vector<string>& list) const {
+    bool alreadyAdded = false;
+
+    for (int i = 0; i < (int)list.size(); i++) {
+        if (list[i] == operatorName) {
+            alreadyAdded = true;
+        }
+    }
+
+    if (!alreadyAdded) {
+        list.push_back(operatorName);
+    }
+}
