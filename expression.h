@@ -35,6 +35,11 @@ private:
 
     bool isLowOperator(string token) const;
     bool isMiddleOperator(string token) const;
+
+    bool variable_value(string variableName) const;
+    bool currentA;
+    bool currentB;
+    bool currentC;
 };
 
 #endif
