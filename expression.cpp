@@ -124,3 +124,34 @@ void BooleanExpression::add_usedOperator(string operatorName, vector<string>& li
         list.push_back(operatorName);
     }
 }
+
+vector<string> BooleanExpression::stepLabels() const {
+    BooleanExpression copy = *this;
+    bool isValid = true;
+
+    // resetting the current index and variable values to their default state before parsing the expression to generate the step labels
+    copy.currentIndex = 0;
+    copy.currentA = false;
+    copy.currentB = false;
+    copy.currentC = false;
+    copy.currentStepLabels.clear();
+    copy.currentStepValues.clear();
+
+    copy.parseExpression(isValid);
+    return copy.currentStepLabels;
+}
+
+vector<int> BooleanExpression::evaluateSteps(bool aValue, bool bValue, bool cValue) const {
+    BooleanExpression copy = *this; // creating a copy of the current expression object to evaluate the steps without modifying the original object
+    bool isValid = true;
+
+    copy.currentIndex = 0;
+    copy.currentA = aValue;
+    copy.currentB = bValue;
+    copy.currentC = cValue;
+    copy.currentStepLabels.clear();
+    copy.currentStepValues.clear();
+
+    copy.parseExpression(isValid);
+    return copy.currentStepValues;
+}
