@@ -22,6 +22,9 @@ public:
     vector<char> variables_used() const;
     vector<string>operators_used() const;
 
+    vector<string> stepLabels() const;
+    vector<int> evaluateSteps(bool aValue, bool bValue, bool cValue) const;
+
 private:
     string changeToUpperCase(string text) const;
     bool splitTokens();     // function to split the input expression into tokens and store them in a vector
@@ -40,6 +43,11 @@ private:
     bool currentA;
     bool currentB;
     bool currentC;
+
+    int currentIndex;
+    vector<string> currentStepLabels;
+    vector<int> currentStepValues;
+    result parseExpression(bool& isValid);
 };
 
 #endif
