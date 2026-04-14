@@ -80,3 +80,21 @@ vector<string> BooleanExpression::operators_used() const {
 
     return used_operators;
 }
+
+// implementing functions to check variables and type of operators in the expression
+bool BooleanExpression::isVariable(string token) const {
+    return token == "A" || token == "B" || token == "C";
+}
+
+bool BooleanExpression::isLowOperator(string token) const {
+    return token == "OR" || token == "XOR" || token == "NOR";
+}
+
+bool BooleanExpression::isMiddleOperator(string token) const {
+    return token == "AND" || token == "NAND";
+}
+
+bool BooleanExpression::isAnyOperator(string token) const {
+    return token == "AND" || token == "OR" || token == "NOT" ||
+           token == "XOR" || token == "NAND" || token == "NOR";
+}
