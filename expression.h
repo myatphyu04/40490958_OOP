@@ -48,6 +48,9 @@ private:
     vector<string> currentStepLabels;
     vector<int> currentStepValues;
     result parseExpression(bool& isValid);
+    
+    result parseTerm(bool& isValid);
+    result parseFactor(bool& isValid);
 };
 
 #endif
