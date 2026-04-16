@@ -12,6 +12,17 @@ BooleanExpression::result BooleanExpression::parseFactor(bool& isValid) {
         return answer;
     }
 
+    // NOT operator handling
+    if (currentIndex < (int)tokenList.size() && tokenList[currentIndex] == "NOT") {
+        currentIndex++;
+        result insideAnswer = parseFactor(isValid); // recursively get the result of the expression inside the NOT operator
+        answer.value = opera_facto.applyUnaryOperator("NOT", insideAnswer.value);
+        answer.label = "NOT(" + insideAnswer.label + ")";
+        currentStepLabels.push_back(answer.label);
+        currentStepValues.push_back(answer.value ? 1 : 0);
+        return answer;
+    }
+
     // bracket handling
     if (tokenList[currentIndex] == "(") {
     currentIndex++;
