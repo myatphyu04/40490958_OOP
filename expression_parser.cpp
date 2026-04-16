@@ -93,3 +93,41 @@ BooleanExpression::result BooleanExpression::parseTerm(bool& isValid) {
 
     return leftSide;
 }
+
+// implementing function to evaluate an expression by applying low-precedence operators like OR, XOR, NOR to terms
+BooleanExpression::result BooleanExpression::parseExpression(bool& isValid) {
+    result leftSide = parseTerm(isValid);   // parse first term to get the left side of the expression
+
+    while (isValid && currentIndex < (int)tokenList.size() && isLowOperator(tokenList[currentIndex])) {
+        string operatorName = tokenList[currentIndex];  // read the operator and move to the next token
+        currentIndex++;
+
+        result rightSide = parseTerm(isValid);      // evaluate the next term to apply operator on both sides
+        result answer;
+
+        if (operatorName == "NOR") {
+            result orStep;
+            orStep.value = opera_facto.applyBinaryOperator("OR", leftSide.value, rightSide.value);
+            orStep.label = "(" + leftSide.label + " OR " + rightSide.label + ")";
+            
+            // store intermediate step for OR before applying NOT to get NOR result
+            currentStepLabels.push_back(orStep.label);
+            currentStepValues.push_back(orStep.value ? 1 : 0);
+
+            answer.value = opera_facto.applyUnaryOperator("NOT", orStep.value);     // Nor is handled as NOT(OR)
+            answer.label = "NOT(" + orStep.label + ")";
+            currentStepLabels.push_back(answer.label);
+            currentStepValues.push_back(answer.value ? 1 : 0);
+        }
+        else {
+            answer.value = opera_facto.applyBinaryOperator(operatorName, leftSide.value, rightSide.value);
+            answer.label = "(" + leftSide.label + " " + operatorName + " " + rightSide.label + ")";
+            currentStepLabels.push_back(answer.label);
+            currentStepValues.push_back(answer.value ? 1 : 0);
+        }
+
+        leftSide = answer;
+    }
+
+    return leftSide;
+}
