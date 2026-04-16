@@ -48,9 +48,11 @@ private:
     vector<string> currentStepLabels;
     vector<int> currentStepValues;
     result parseExpression(bool& isValid);
-    
+
     result parseTerm(bool& isValid);
     result parseFactor(bool& isValid);
+
+    OperatorFactory opera_facto;   // creating an instance of the operator factory class to use its functions in this class
 };
 
 #endif
