@@ -12,6 +12,14 @@ using namespace std;
 class TruthTable {
 public:
     string generate(const BooleanExpression& expression) const;
+
+private:
+    string makeSpaces(int count) const;
+    string makeDashes(int count) const;
+    string fitCell(string text, int width) const;
+    vector<string> buildHeaders(const BooleanExpression& expression) const;
+    vector<int> buildWidths(const vector<string>& headers) const;
+
 };
 
 #endif
