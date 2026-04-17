@@ -42,4 +42,10 @@ int main() {
     report += truthTable.generate(expression);      // generate and add the truth table to the report
 
     cout << "\n" << report << "\n";
+
+    string saveChoice;
+    cout << "Would you like to save this expression and truth table to a file? (Y/N): ";
+    getline(cin, saveChoice);   // read the user's choice for saving the report
+
+    return 0;
 }
