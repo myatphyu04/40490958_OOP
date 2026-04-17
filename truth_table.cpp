@@ -83,5 +83,19 @@ string TruthTable::generate(const BooleanExpression& expression) const {
     }
     output += "\n";
 
+    for (int row = 0; row < totalRows; row++) {
+        // generate all possible combinations of A, B, and C using row index patterns
+        bool aValue = (row / 4) % 2;
+        bool bValue = (row / 2) % 2;
+        bool cValue = row % 2;
+
+        output += "|";
+        // convert boolean values to 1 or 0 and format into table columns
+        output += " " + fitCell(aValue ? "1" : "0", widths[0]) + " |";
+        output += " " + fitCell(bValue ? "1" : "0", widths[1]) + " |";
+        output += " " + fitCell(cValue ? "1" : "0", widths[2]) + " |";
+        output += "\n";
+    }
+
     return output;
 }
