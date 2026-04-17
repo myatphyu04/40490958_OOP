@@ -94,6 +94,20 @@ string TruthTable::generate(const BooleanExpression& expression) const {
         output += " " + fitCell(aValue ? "1" : "0", widths[0]) + " |";
         output += " " + fitCell(bValue ? "1" : "0", widths[1]) + " |";
         output += " " + fitCell(cValue ? "1" : "0", widths[2]) + " |";
+
+        // evaluate the expression using the current row values of A, B, and C
+        vector<int> stepValues = expression.evaluateSteps(aValue, bValue, cValue);
+
+        for (int i = 0; i < (int)stepValues.size(); i++) {
+            string valueText = "0";
+
+            if (stepValues[i] == 1) {
+                valueText = "1";
+            }
+
+            output += " " + fitCell(valueText, widths[i + 3]) + " |";   // add evaluated step values to the corresponding columns after A, B, C
+        }
+
         output += "\n";
     }
 
