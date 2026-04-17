@@ -25,6 +25,7 @@ string buildExplanationText(const BooleanExpression& expression) {
 int main() {
     BooleanExpression expression;
     TruthTable truthTable;
+    FileManager fileManager;
 
     cout << "*** BOOLEAN TRUTH TABLE SIMULATOR ***\n\n";
     cout << "Enter Boolean Expression (max 3 operators, variables A, B, C): ";
@@ -46,6 +47,17 @@ int main() {
     string saveChoice;
     cout << "Would you like to save this expression and truth table to a file? (Y/N): ";
     getline(cin, saveChoice);   // read the user's choice for saving the report
+
+    if (saveChoice == "Y" || saveChoice == "y") // check if user wants to save the output
+    {
+        string filename;
+        cout << "Enter filename: ";
+        getline(cin, filename);
+
+        if (fileManager.saveReport(filename, report)) {
+            cout << "Expression and truth table saved successfully!\n";
+        }
+    }
 
     return 0;
 }
