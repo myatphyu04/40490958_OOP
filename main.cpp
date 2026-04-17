@@ -24,6 +24,7 @@ string buildExplanationText(const BooleanExpression& expression) {
 
 int main() {
     BooleanExpression expression;
+    TruthTable truthTable;
 
     cout << "*** BOOLEAN TRUTH TABLE SIMULATOR ***\n\n";
     cout << "Enter Boolean Expression (max 3 operators, variables A, B, C): ";
@@ -34,3 +35,11 @@ int main() {
     if (!expression.setExpression(inputExpression)) {
         return 0;   // exit the program if the expression is invalid
     }
+
+    string report = "";
+    report += buildExplanationText(expression);     // add operator explanations
+    report += "\n";
+    report += truthTable.generate(expression);      // generate and add the truth table to the report
+
+    cout << "\n" << report << "\n";
+}
