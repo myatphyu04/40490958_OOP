@@ -8,6 +8,20 @@
 
 using namespace std;
 
+// function to build the operator explanation text
+string buildExplanationText(const BooleanExpression& expression) {
+    OperatorFactory operaFactory;
+    vector<string> usedOperators = expression.operators_used();     // get the list of operators used in the expression
+    string text = "Operators Detected and Explained:\n";
+
+    for (int i = 0; i < (int)usedOperators.size(); i++) {
+        text += "- " + usedOperators[i] + ": " + operaFactory.getOperatorDescription(usedOperators[i]) + "\n";
+        // add the operator name and its description to the explanation text
+    }
+
+    return text;
+}
+
 int main() {
     BooleanExpression expression;
 
