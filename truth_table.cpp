@@ -63,3 +63,25 @@ vector<int> TruthTable::buildWidths(const vector<string>& headers) const {
 
     return widths;
 }
+
+// function to generate the truth table for a given boolean expression
+string TruthTable::generate(const BooleanExpression& expression) const {
+    string output = "Generating Truth Table...\n";
+    vector<string> headers = buildHeaders(expression);
+    vector<int> widths = buildWidths(headers);
+    int totalRows = 8;  // total combinations of A, B, C)
+
+    output += "|";
+    for (int i = 0; i < (int)headers.size(); i++) {
+        output += " " + fitCell(headers[i], widths[i]) + " |";  // format each header cell properly
+    }
+    output += "\n";
+
+    output += "|";
+    for (int i = 0; i < (int)headers.size(); i++) {
+        output += makeDashes(widths[i] + 2) + "|";  // add a separator line of dashes under the headers
+    }
+    output += "\n";
+
+    return output;
+}
