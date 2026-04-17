@@ -52,3 +52,14 @@ vector<string> TruthTable::buildHeaders(const BooleanExpression& expression) con
 
     return headers;
 }
+
+// function to build the widths of the columns in the truth table
+vector<int> TruthTable::buildWidths(const vector<string>& headers) const {
+    vector<int> widths;
+
+    for (int i = 0; i < (int)headers.size(); i++) {
+        widths.push_back((int)headers[i].size());   // set the initial width of each column to the length of its header
+    }
+
+    return widths;
+}
